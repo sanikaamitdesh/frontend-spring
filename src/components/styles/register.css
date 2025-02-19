@@ -1,0 +1,78 @@
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+  }
+  
+  .register-box {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 350px;
+    text-align: center;
+  }
+  
+  .register-box h2 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .register-box input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .register-box button {
+    width: 100%;
+    background: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .register-box button:hover {
+    background: #0056b3;
+  }
+  
+  /* ✅ "Sign In" button styling */
+  .signin-btn {
+    background: #28a745;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .signin-btn:hover {
+    background: #218838;
+  }
+  
+  /* ✅ "Send OTP" button */
+  .send-otp-btn {
+    background: #ff9800;
+  }
+  
+  .send-otp-btn:hover {
+    background: #e68900;
+  }
+  
+  /* ✅ "Verify OTP & Register" button */
+  .register-btn {
+    background: #17a2b8;
+  }
+  
+  .register-btn:hover {
+    background: #138496;
+  }
+  
