@@ -1,0 +1,79 @@
+.navbar {
+    width: calc(100% - 180px);  /* Adjust width to match sidebar */
+    height: 60px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    position: fixed;
+    top: 0;
+    left: 180px;  /* Ensure it starts after the sidebar */
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Left Side - Logo */
+.nav-left {
+    display: flex;
+    align-items: center;
+}
+
+.nav-logo {
+    width: 50px;  
+    height: auto;
+    object-fit: contain;
+    margin-right: 10px;
+}
+
+.navbar-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Right Side */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Icons */
+.notifications, .messages, .profile {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.icon {
+    font-size: 20px;
+    color: #333;
+}
+
+.badge {
+    position: absolute;
+    top: -5px;
+    right: -8px;
+    background: red;
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 50%;
+}
+
+/* Profile */
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.profile-icon {
+    font-size: 22px;
+}
+
+.profile-name {
+    font-size: 14px;
+}
