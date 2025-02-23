@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "./styles/register.css"; // Import CSS
-
+import "../styles/register.css"; // Import CSS
+import Sidebar from "../components/Sidebar";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 const Register = () => {
   const navigate = useNavigate();
   
@@ -62,6 +64,9 @@ const Register = () => {
   };
 
   return (
+    <div className="main-content">
+      <Sidebar />
+      <Navbar />
     <div className="register-container">
       <div className="register-box">
         <h2>Student Signup</h2>
@@ -122,6 +127,7 @@ const Register = () => {
           </button>
         </div>
       </div>
+    </div>
     </div>
   );
 };

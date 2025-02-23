@@ -7,6 +7,8 @@
 // export default RequestForm;
 import React, { useState } from "react";
 import "../styles/RequestForm.css"; 
+import Sidebar from "../components/Sidebar";
+import Navbar from "../components/Navbar";
 
 
 const RequestForm = () => {
@@ -33,6 +35,8 @@ const RequestForm = () => {
 
   return (
     <div className="request-form-container">
+      <Sidebar />
+      <Navbar />
       <h2>Request a Document</h2>
       <form onSubmit={handleSubmit} className="request-form">
         <div className="form-group">

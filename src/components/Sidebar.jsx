@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaHome, FaFileAlt, FaClock, FaHistory, FaEnvelope, FaSignOutAlt } from "react-icons/fa";
-import "../styles/Sidebar.css";
+import "./Sidebar.css";
 
 const Sidebar = () => {
   const navigate = useNavigate(); // ✅ Hook for navigation

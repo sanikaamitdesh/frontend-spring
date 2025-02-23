@@ -1,0 +1,98 @@
+/* ✅ General container styling */
+/* ✅ Center login form properly */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    background-color: #f4f4f4;
+    padding-top: 10px;  /* ✅ Push content below fixed navbar */
+}
+
+/* ✅ Fix Login Button alignment */
+.login-box button {
+    width: 20%;
+    background:  #120101;
+    color: white;
+    padding: 2px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+    margin-top: 10px;
+}
+
+.login-box button:hover {
+    background:  #120101
+}
+
+
+.login-box h2 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* ✅ Input Fields */
+.login-box input {
+    width:60%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+}
+
+.login-box input:focus {
+    border-color: #120101;
+    outline: none;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+/* ✅ Login & Sign Up Buttons */
+.login-box button {
+    width: 65%;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin-top: 10px;
+}
+
+.login-box button:hover {
+    opacity: 0.8;
+}
+
+/* ✅ Primary Login Button */
+.login-box .login-btn {
+    background:  #120101;
+    color: white;
+}
+
+.login-box .login-btn:hover {
+    background:  #120101
+}
+
+/* ✅ Sign Up Button */
+.signup-btn {
+    background:  #120101;
+    color: white;
+}
+
+.signup-btn:hover {
+    background: #138496;
+}
+
+/* ✅ Extra options below buttons */
+.signup-option {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+}
