@@ -27,7 +27,10 @@ const Register = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post("http://localhost:8080/auth/signup", { email: formData.email });
+
+      const response = await axios.post("http://localhost:8080/auth/signup", { email: formData.email.trim()});
+      // console.log("Response:", response.data); // ✅ Debugging
+
       alert(response.data); // ✅ Debugging: Show OTP Sent Message
       setOtpSent(true); // ✅ Show OTP input field
     } catch (error) {
