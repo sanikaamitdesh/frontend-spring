@@ -1,0 +1,116 @@
+/* ===== Main Content Styling ===== */
+.container {
+    display: flex;
+}
+
+.main-content {
+    margin-left: 270px;
+    padding: 20px;
+    width: calc(100% - 270px);
+}
+
+h1 {
+    text-align: center;
+    font-size: 24px;
+    color: #2c3e50;
+}
+
+/* ===== Dashboard Table Styling ===== */
+.dashboard {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: #ecf0f1;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    vertical-align: middle;
+}
+
+th {
+    background: #3498db;
+    color: white;
+}
+
+/* ===== Profile Status Styling ===== */
+.status {
+    color: green;
+    font-weight: bold;
+}
+
+.update-btn {
+    display: block;
+    width: 90%;
+    margin: 5px auto;
+    padding: 8px;
+    background: #2980b9;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.update-btn:hover {
+    background: #1f618d;
+}
+
+/* ===== Request Document Styling ===== */
+.dropdown {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 5px;
+}
+
+.reason-input {
+    width: 100%;
+    height: 50px;
+    padding: 5px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.request-btn {
+    width: 100%;
+    background: #27ae60;
+    color: white;
+    padding: 8px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.request-btn:hover {
+    background: #219150;
+}
+
+/* ===== Action Buttons (Links) Styling ===== */
+.btn {
+    display: block;
+    text-align: center;
+    background: #3498db;
+    color: white;
+    padding: 8px;
+    margin: 5px auto;
+    border-radius: 5px;
+    text-decoration: none;
+    width: 80%;
+}
+
+.btn:hover {
+    background: #2980b9;
+}

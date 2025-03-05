@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaMicrophone, FaPaperclip, FaPaperPlane, FaUserCircle } from "react-icons/fa";
+import Sidebar from "../components/Sidebar"; // Import Sidebar
 import "../styles/Messages.css";
 
 const ChatWithAdmin = () => {
@@ -17,34 +18,38 @@ const ChatWithAdmin = () => {
   };
 
   return (
-    <div className="chat-container">
-      {/* Chat Header */}
-      <div className="chat-header">
-        <FaUserCircle size={24} /> Admin
-      </div>
+    <div className="chat-page">
+      <Sidebar /> {/* Sidebar Added */}
 
-      {/* Messages */}
-      <div className="chat-messages">
-        {messages.map((msg, index) => (
-          <div key={index} className={`message ${msg.type}`}>
-            {msg.text}
-          </div>
-        ))}
-      </div>
+      <div className="chat-container">
+        {/* Chat Header */}
+        <div className="chat-header">
+          <FaUserCircle size={24} /> Admin
+        </div>
 
-      {/* Chat Input */}
-      <div className="chat-input">
-        <FaPaperclip className="icon" />
-        <input
-          type="text"
-          placeholder="Type a message"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-        />
-        <FaMicrophone className="icon" />
-        <button onClick={sendMessage}>
-          <FaPaperPlane />
-        </button>
+        {/* Messages */}
+        <div className="chat-messages">
+          {messages.map((msg, index) => (
+            <div key={index} className={`message ${msg.type}`}>
+              {msg.text}
+            </div>
+          ))}
+        </div>
+
+        {/* Chat Input */}
+        <div className="chat-input">
+          <FaPaperclip className="icon" />
+          <input
+            type="text"
+            placeholder="Type a message"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+          />
+          <FaMicrophone className="icon" />
+          <button onClick={sendMessage}>
+            <FaPaperPlane />
+          </button>
+        </div>
       </div>
     </div>
   );

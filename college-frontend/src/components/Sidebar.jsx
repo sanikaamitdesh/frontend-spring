@@ -1,35 +1,56 @@
+// import React from "react";
+// import { Link } from "react-router-dom";
+// import "../styles/Sidebar.css";
+// import logo from "../Img/pic.jpg" // Add your logo image
+
+// const Sidebar = () => {
+//     return (
+//         <div className="sidebar">
+//             <img src={logo} alt="SPPU Logo" className="logo" />
+           
+//             <ul>
+//                 <li><Link to="/student-dashboard">Dashboard</Link></li>
+//                 <li><Link to="/Messages">Messages</Link></li>
+//                 <li><Link to="/notifications">Notifications</Link></li>
+//                 <li><Link to="/logout">Log Out</Link></li>
+//             </ul>
+//         </div>
+//     );
+// };
+
+// export default Sidebar;
+
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaHome, FaFileAlt, FaClock, FaHistory, FaEnvelope, FaSignOutAlt } from "react-icons/fa";
 import "../styles/Sidebar.css";
+import logo from "../Img/pic.jpg"; // Add your logo image
 
 const Sidebar = () => {
-  const navigate = useNavigate(); // ✅ Hook for navigation
+    const navigate = useNavigate();
 
-  const handleLogout = () => {
-    localStorage.removeItem("isAuthenticated");  // ✅ Remove authentication flag
-    localStorage.removeItem("userRole");         // ✅ Remove user role
-    localStorage.removeItem("userName");         // ✅ Remove user name
-    navigate("/login"); // ✅ Redirect to login page
-  };
+    const handleLogout = () => {
+        // Clear authentication-related data if any
+        localStorage.removeItem("token"); // If using JWT authentication
+        sessionStorage.clear(); // If using session storage
 
-  return (
-    <div className="sidebar">
-      {/* Sidebar Menu */}
-      <ul className="menu">
-        <li><Link to="/"><FaHome /> Home</Link></li>
-        <li><Link to="/request-form"><FaFileAlt /> Request Form</Link></li>
-        <li><Link to="/status"><FaClock /> Status</Link></li>
-        <li><Link to="/history"><FaHistory /> History</Link></li>
-        <li><Link to="/messages"><FaEnvelope /> Messages</Link></li>
-        
-        {/* ✅ Logout Button */}
-        <li className="logout" onClick={handleLogout}>
-          <FaSignOutAlt /> Logout
-        </li>
-      </ul>
-    </div>
-  );
+        // Redirect to the home page
+        navigate("/");
+    };
+
+    return (
+        <div className="sidebar">
+            <img src={logo} alt="Logo" className="logo" />
+            <ul>
+                <li><Link to="/student-dashboard">Dashboard</Link></li>
+                <li><Link to="/Messages">Messages</Link></li>
+                <li><Link to="/notifications">Notifications</Link></li>
+
+                <li><Link to="/CreateAccount">CreateAccount</Link></li>
+                {/* Use a button instead of Link for Logout */}
+                <li><button className="logout-btn" onClick={handleLogout}>Log Out</button></li>
+            </ul>
+        </div>
+    );
 };
 
 export default Sidebar;

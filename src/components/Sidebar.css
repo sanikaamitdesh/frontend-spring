@@ -1,95 +1,99 @@
+/* Sidebar container */
 .sidebar {
-    width: 180px;
-    height: 100vh;  /* Ensure full height */
-    background-color: #2a3f54;
-    color: white;
+    width: 250px;
+    height: 100vh;
+    background-color: #2A3F54; /* Dark blue */
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 20px 0;
-    position: fixed;  /* Fix it to the left */
+    position: fixed;
     left: 0;
-    top: 0;  /* Align with the navbar */
+    top: 0;
+    z-index: 1000;
     transition: width 0.3s ease-in-out;
+    padding-top: 15px;
 }
 
+/* Sidebar header (Logo) */
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    border-bottom: 1px solid #445c75;
+}
 
-/* Menu Styling */
+.sidebar-header img {
+    width: 70px;
+    height: 70px;
+}
+
+/* Sidebar Menu */
 .menu {
     list-style: none;
     padding: 0;
+    margin-top: 10px;
     width: 100%;
 }
 
-/* Individual Menu Items */
 .menu li {
-    padding: 15px 20px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    padding: 12px 20px;
+    gap: 12px;
     font-size: 16px;
     cursor: pointer;
-    transition: background 0.3s, transform 0.2s ease-in-out;
-    animation: slideIn 0.5s ease-in-out forwards;
-    opacity: 0; /* Initially hidden */
+    transition: background 0.3s ease-in-out;
+    color: white;
 }
 
-/* Apply different delays for each item */
-.menu li:nth-child(1) { animation-delay: 0.1s; }
-.menu li:nth-child(2) { animation-delay: 0.2s; }
-.menu li:nth-child(3) { animation-delay: 0.3s; }
-.menu li:nth-child(4) { animation-delay: 0.4s; }
-.menu li:nth-child(5) { animation-delay: 0.5s; }
-
-/* Hover Effect */
 .menu li:hover {
-    background-color: #2c7cd2;
-    transform: scale(1.05);
+    background-color: #1E2D3D;
+    border-left: 4px solid #007bff;
 }
 
-/* Make links visible */
-.menu li a {
-    text-decoration: none;
-    color: #ffffff;
+/* Sidebar Buttons */
+.menu li button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    text-align: left;
     width: 100%;
+    cursor: pointer;
     display: flex;
     align-items: center;
     gap: 10px;
+    padding: 10px 15px;
 }
 
-/* Logout Button Styling */
-.logout {
-    margin-top: auto;
-    color: #e64c43;
-    animation-delay: 0.6s;
+.menu li button:hover {
+    background-color: #1E2D3D;
+    color: #17a2b8;
 }
 
-/* Sidebar Responsive (Collapsed Mode) */
+/* Icons */
+.menu li i {
+    font-size: 18px;
+}
+
+/* Active Sidebar Item */
+.menu li.active {
+    background-color: #17a2b8;
+    font-weight: bold;
+}
+
+/* Responsive Design */
 @media screen and (max-width: 768px) {
     .sidebar {
-        width: 60px;
-        align-items: flex-start;
-        padding: 10px 0;
+        width: 70px;
     }
 
     .menu li {
         justify-content: center;
-        padding: 12px;
+        padding: 12px 10px;
     }
 
-    .menu li a {
-        font-size: 18px;
-    }
-
-    /* Hide text when collapsed */
     .menu li a span {
         display: none;
     }
-}
-
-/* Animations */
-/* Fade in for sidebar items */
-@keyframes slideIn {
-    from { opacity: 0; transform: translateX(-20px); }
-    to { opacity: 1; transform: translateX(0); }
 }

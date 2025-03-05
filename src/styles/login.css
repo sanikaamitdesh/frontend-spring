@@ -1,98 +1,53 @@
-/* ✅ General container styling */
-/* ✅ Center login form properly */
+/* ✅ Ensure the entire page has a white background */
+.main-content {
+    display: flex;
+    background-color: white;
+    height: 100vh; /* Full viewport height */
+}
+
+/* ✅ Center the Login form properly */
 .login-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 50vh;
-    background-color: #f4f4f4;
-    padding-top: 10px;  /* ✅ Push content below fixed navbar */
+    flex-grow: 1; /* Takes full available space */
 }
 
-/* ✅ Fix Login Button alignment */
-.login-box button {
-    width: 20%;
-    background:  #120101;
-    color: white;
-    padding: 2px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s ease-in-out;
-    margin-top: 10px;
-}
-
-.login-box button:hover {
-    background:  #120101
-}
-
-
-.login-box h2 {
-    margin-bottom: 20px;
-    color: #333;
-    font-size: 24px;
-    font-weight: bold;
+/* ✅ Style the login box */
+.login-box {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 350px;
 }
 
 /* ✅ Input Fields */
 .login-box input {
-    width:60%;
+    width: 100%;
     padding: 12px;
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
-    transition: all 0.3s ease-in-out;
 }
 
-.login-box input:focus {
-    border-color: #120101;
-    outline: none;
-    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
-}
-
-/* ✅ Login & Sign Up Buttons */
+/* ✅ Buttons */
 .login-box button {
-    width: 65%;
-    padding: 8px;
+    width: 100%;
+    padding: 10px;
+    background: #120101;
+    color: white;
     border: none;
     border-radius: 5px;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
-    transition: all 0.3s ease-in-out;
     margin-top: 10px;
+    transition: 0.3s;
 }
 
 .login-box button:hover {
     opacity: 0.8;
-}
-
-/* ✅ Primary Login Button */
-.login-box .login-btn {
-    background:  #120101;
-    color: white;
-}
-
-.login-box .login-btn:hover {
-    background:  #120101
-}
-
-/* ✅ Sign Up Button */
-.signup-btn {
-    background:  #120101;
-    color: white;
-}
-
-.signup-btn:hover {
-    background: #138496;
-}
-
-/* ✅ Extra options below buttons */
-.signup-option {
-    margin-top: 20px;
-    font-size: 14px;
-    color: #666;
 }

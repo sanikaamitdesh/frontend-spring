@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import Navbar from "../components/Navbar";
+//  import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
 import "../styles/home.css"; // ✅ Ensure CSS is imported
@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <div className="home-container">
       <Sidebar /> {/* ✅ Sidebar properly placed */}
-      <Navbar />
+       {/* <Navbar />  */}
 
       <div className="main-content">
         <div className="home-content">

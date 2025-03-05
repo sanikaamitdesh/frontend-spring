@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../styles/login.css"; 
-import Navbar from "../components/Navbar";
+// import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Sidebar from "../components/Sidebar";
 
@@ -49,7 +49,7 @@ const Login = () => {
   return (
     <div className="main-content">
       <Sidebar />
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="login-container">
         <div className="login-box">
           <h2>Login</h2>

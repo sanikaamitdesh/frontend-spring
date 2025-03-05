@@ -1,32 +1,44 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaHome, FaFileAlt, FaClock, FaHistory, FaEnvelope, FaSignOutAlt } from "react-icons/fa";
+import { FaHome, FaUserGraduate, FaSignInAlt, FaUserPlus, FaUserShield, FaFileAlt } from "react-icons/fa";
 import "./Sidebar.css";
 
+import logo from "../Img/pic.jpg"
+
 const Sidebar = () => {
-  const navigate = useNavigate(); // ✅ Hook for navigation
+  const navigate = useNavigate();
+  const isAuthenticated = localStorage.getItem("isAuthenticated");
 
   const handleLogout = () => {
-    localStorage.removeItem("isAuthenticated");  // ✅ Remove authentication flag
-    localStorage.removeItem("userRole");         // ✅ Remove user role
-    localStorage.removeItem("userName");         // ✅ Remove user name
-    navigate("/login"); // ✅ Redirect to login page
+    localStorage.removeItem("isAuthenticated");
+    localStorage.removeItem("userRole");
+    localStorage.removeItem("userName");
+    navigate("/login");
   };
 
   return (
     <div className="sidebar">
-      {/* Sidebar Menu */}
+      <div className="sidebar-header">
+        <img src={logo} alt="Logo" className="logo" />
+      
+      </div>
+      
       <ul className="menu">
-        <li><Link to="/"><FaHome /> Home</Link></li>
-        <li><Link to="/request-form"><FaFileAlt /> Request Form</Link></li>
-        <li><Link to="/status"><FaClock /> Status</Link></li>
-        <li><Link to="/history"><FaHistory /> History</Link></li>
-        <li><Link to="/messages"><FaEnvelope /> Messages</Link></li>
-        
-        {/* ✅ Logout Button */}
-        <li className="logout" onClick={handleLogout}>
-          <FaSignOutAlt /> Logout
+        <li><Link to="/"><FaHome /><span>  Home</span></Link></li>
+
+        {/* Student Section */}
+        <li className="submenu disabled">
+          <FaUserGraduate /><span>Student</span>
         </li>
+        <li><Link to="/register"><FaUserPlus /><span> Sign Up</span></Link></li>
+        <li><Link to="/login"><FaSignInAlt /><span> Log In</span></Link></li>
+
+       
+        {/* Admin Section */}
+        <li className="submenu disabled">
+          <FaUserShield /><span> Admin</span>
+        </li>
+        <li><Link to="/login"><FaSignInAlt /><span>Log In</span></Link></li>
       </ul>
     </div>
   );
