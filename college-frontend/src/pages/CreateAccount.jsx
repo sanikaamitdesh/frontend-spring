@@ -1,7 +1,6 @@
- import React, { useState } from "react";
-// import Sidebar from "../components/Sidebar.jsx"; // Import Sidebar component
-
+import React, { useState } from "react";
 import Sidebar from "../components/Sidebar.jsx";
+import axios from "axios"; // Import axios
 import "../styles/CreateAccount.css";
 
 const StudentForm = () => {
@@ -10,6 +9,7 @@ const StudentForm = () => {
     year: "",
     rollNo: "",
     prnNo: "",
+    branch: ""
   });
 
   const [submitted, setSubmitted] = useState(false);
@@ -18,12 +18,23 @@ const StudentForm = () => {
     setStudent({ ...student, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (student.name && student.year && student.rollNo && student.prnNo) {
-      setSubmitted(true);
-    } else {
+    
+    if (!student.name || !student.year || !student.rollNo || !student.prnNo || !student.branch) {
       alert("Please fill all fields");
+      return;
+    }
+
+    try {
+      const response = await axios.post("http://localhost:8080/students/create", student);
+      console.log("Response:", response.data);
+      setSubmitted(true);
+      localStorage.setItem("rollNo", student.rollNo); // Store roll number in local storage for Dashboard
+      alert("Student Registered Successfully!");
+    } catch (error) {
+      console.error("Error registering student:", error);
+      alert("Failed to create student account. Please try again.");
     }
   };
 
@@ -47,6 +58,15 @@ const StudentForm = () => {
                 <option value="BE">BE</option>
               </select>
 
+              <label>Branch:</label>
+              <select name="branch" value={student.branch} onChange={handleChange} required>
+                <option value="">Select Branch</option>
+                <option value="CS">CS</option>
+                <option value="IT">IT</option>
+                <option value="ENTC">ENTC</option>
+                <option value="AIDS">AIDS</option>
+              </select>
+
               <label>Roll No:</label>
               <input type="text" name="rollNo" value={student.rollNo} onChange={handleChange} required />
 
@@ -60,6 +80,7 @@ const StudentForm = () => {
               <h3>Student Registered Successfully!</h3>
               <p><strong>Name:</strong> {student.name}</p>
               <p><strong>Year:</strong> {student.year}</p>
+              <p><strong>Branch:</strong> {student.branch}</p>
               <p><strong>Roll No:</strong> {student.rollNo}</p>
               <p><strong>PRN No:</strong> {student.prnNo}</p>
             </div>
