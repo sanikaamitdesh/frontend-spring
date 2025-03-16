@@ -27,10 +27,11 @@ import logo from "../Img/pic.jpg"; // Add your logo image
 
 const Sidebar = () => {
     const navigate = useNavigate();
-
+    const isRegistered = localStorage.getItem("rollNo");
     const handleLogout = () => {
         // Clear authentication-related data if any
-        localStorage.removeItem("token"); // If using JWT authentication
+        localStorage.removeItem("token");
+        localStorage.removeItem("rollNo"); // If using JWT authentication
         sessionStorage.clear(); // If using session storage
 
         // Redirect to the home page
@@ -45,7 +46,9 @@ const Sidebar = () => {
                 <li><Link to="/Messages">Messages</Link></li>
                 <li><Link to="/notifications">Notifications</Link></li>
 
-                <li><Link to="/CreateAccount">CreateAccount</Link></li>
+                {!isRegistered && (
+                    <li><Link to="/CreateAccount">Create Account</Link></li>
+                )}
                 {/* Use a button instead of Link for Logout */}
                 <li><button className="logout-btn" onClick={handleLogout}>Log Out</button></li>
             </ul>

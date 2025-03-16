@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar.jsx";
 import axios from "axios";
 import "../styles/Dashboard.css";
@@ -8,16 +8,27 @@ const Dashboard = () => {
     const [student, setStudent] = useState(null);
     const [selectedDocument, setSelectedDocument] = useState("");
     const [reason, setReason] = useState("");
+    const navigate = useNavigate();
 
     useEffect(() => {
-        const rollNo = localStorage.getItem("rollNo") || "32241"; // Get roll number from localStorage
+        const userEmail = localStorage.getItem("userName"); // Get email/username of logged-in user
 
-        axios.get(`http://localhost:8080/students/${rollNo}`) 
+        if (!userEmail) {
+            console.error("User not logged in!");
+            return;
+        }
+
+        // Fetch student data based on logged-in email
+        axios.get(`http://localhost:8080/students/email/${userEmail}`)
             .then(response => {
-                setStudent(response.data);
+                if (response.data) {
+                    setStudent(response.data); // Set student details if found
+                    localStorage.setItem("rollNo", response.data.rollNo); // Store rollNo for future requests
+                }
             })
             .catch(error => {
-                console.error("Error fetching student data:", error);
+                console.error("No student data found, profile incomplete:", error);
+                setStudent(null); // Ensure profile incomplete is displayed
             });
     }, []);
 
@@ -57,7 +68,16 @@ const Dashboard = () => {
                                     <strong>Roll No.:</strong> {student ? student.rollNo : "Loading..."}
                                 </td>
                                 <td className="status">
-                                    Profile complete.<br />
+                                    {student ? (
+                                        "Profile complete."
+                                    ) : (
+                                        <>
+                                            <span className="profile-incomplete">Profile Incomplete</span>
+                                            <button className="btn create-account-btn" onClick={() => navigate("/CreateAccount")}>
+                                                Create Account
+                                            </button>
+                                        </>
+                                    )}
                                 </td>
                                 <td>
                                     <select className="dropdown" value={selectedDocument} onChange={(e) => setSelectedDocument(e.target.value)}>

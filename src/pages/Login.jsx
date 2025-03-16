@@ -17,34 +17,33 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8080/auth/login", 
-        { 
-          identifier: formData.email,  
-          password: formData.password
-        }, 
-        {
-          headers: { "Content-Type": "application/json" }
+        const response = await axios.post("http://localhost:8080/auth/login", 
+            { identifier: formData.email, password: formData.password }, 
+            { headers: { "Content-Type": "application/json" } }
+        );
+
+        if (response.data) {
+            localStorage.setItem("isAuthenticated", "true");
+            localStorage.setItem("userRole", "student");
+            localStorage.setItem("userName", formData.email); // ✅ Store only email
         }
-      );
-
-      console.log(response.data); // Debugging
-
-      if (Array.isArray(response.data)) {
-        localStorage.setItem("isAuthenticated", "true");
-        localStorage.setItem("userRole", "admin");
-        localStorage.setItem("userName", "Admin"); // ✅ Store Admin name
-        navigate("/admin-dashboard", { state: { students: response.data } });
-      } else {
-        localStorage.setItem("isAuthenticated", "true");
-        localStorage.setItem("userRole", "student");
-        localStorage.setItem("userName", formData.email); // ✅ Store Student name
-        navigate("/student-dashboard");
-      }
+        if (Array.isArray(response.data)) {
+          localStorage.setItem("isAuthenticated", "true");
+          localStorage.setItem("userRole", "admin");
+          localStorage.setItem("userName", "Admin"); // ✅ Store Admin name
+          navigate("/admin-dashboard", { state: { students: response.data } });
+        } else {
+          localStorage.setItem("isAuthenticated", "true");
+          localStorage.setItem("userRole", "student");
+          localStorage.setItem("userName", formData.email); // ✅ Store Student name
+          navigate("/student-dashboard");
+        }
+        // navigate("/student-dashboard");
     } catch (error) {
-      console.error(error.response?.data || "Unknown Error");
-      alert("❌ Invalid Credentials!");
+        console.error(error.response?.data || "Unknown Error");
+        alert("❌ Invalid Credentials!");
     }
-  };
+};
 
   return (
     <div className="main-content">
