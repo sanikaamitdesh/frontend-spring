@@ -1,0 +1,83 @@
+/* Sidebar container */
+.sidebar {
+    width: 70px;
+    height: 100vh;
+    background-color:#2A3F54;
+    color: white;
+    padding: 20px;
+    transition: width 0.3s ease-in-out;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .sidebar.closed {
+    width: 70px;
+  }
+  
+  .logo {
+    font-size: 22px;
+    text-align: center;
+    margin-bottom: 20px;
+    transition: opacity 0.3s;
+  }
+  
+  .closed .logo {
+    opacity: 0;
+  }
+  
+  .toggle-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    align-self: flex-end;
+  }
+  
+
+  nav {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .menu-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin: 10px 0;
+    color: white;
+    text-decoration: none;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+    border-radius: 5px;
+  }
+  
+  .menu-item .icon {
+    margin-right: 10px;
+    font-size: 20px;
+  }
+  
+  .menu-item:hover {
+    background-color: #1a252f;
+    transform: scale(1.05);
+  }
+  
+  .logout {
+    margin-top: auto;
+    color: red;
+  }
+  
+  .closed .menu-item {
+    justify-content: center;
+  }
+  
+  .closed .menu-item .icon {
+    margin-right: 0;
+  }
+  
+  .closed .menu-item span {
+    display: none;
+  }
+  

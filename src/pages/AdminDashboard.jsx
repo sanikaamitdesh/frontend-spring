@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import "../styles/admin-dashboard.css"; // Import CSS
-import Sidebar from "../components/Sidebar";
-// import Navbar from "../components/Navbar";
+// import Sidebar from "../components/Sidebar";
+
 import Footer from "../components/Footer";
-const AdminDashboard = () => {
+const AdminDashboard = () => 
+  {
   const location = useLocation();
   const students = location.state?.students || [];
   const [showRegistered, setShowRegistered] = useState(false);
 
   return (
     <div className="app-container">
-      <Sidebar />
+      {/* <Sidebar /> */}
       <div className="main-content">
         {/* <Navbar /> */}
     <div className="dashboard-container">

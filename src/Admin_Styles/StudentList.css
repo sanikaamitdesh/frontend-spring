@@ -1,0 +1,67 @@
+.student-list {
+    margin-top: 20px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    overflow-x: auto;
+  }
+  
+  .student-list h2 {
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: #2A3F54;
+  }
+  
+  .student-list table {
+    /* max-width: 90% ; */
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  .student-list th,
+  .student-list td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+    font-size: 16px;
+  }
+  
+  /* Table Header */
+  .student-list th {
+    background-color: #2A3F54;
+    color: white;
+    font-weight: bold;
+  }
+  
+  /* Alternate Row Color */
+  .student-list tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .student-list tr:hover {
+
+    background-color: #e3e3e3;
+    transition: 0.3s;
+  }
+ 
+.search-bar {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.no-data {
+  text-align: center;
+  font-size: 16px;
+  color: gray;
+  padding: 10px;
+}

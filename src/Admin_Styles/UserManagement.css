@@ -1,0 +1,86 @@
+.user-management {
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: auto;
+    text-align: center;
+    width: 100%;
+  }
+  
+  h2 {
+    font-size: 24px;
+    color: #2a3f54;
+  }
+  
+  .back-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .add-user-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .add-user-container input,
+  .add-user-container select {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+  }
+  
+  .add-user-btn {
+    background: #007bff;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background: #3498db;
+    color: white;
+  }
+  
+  .action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+  }
+  
+  .make-admin-btn {
+    background: #28a745;
+    color: white;
+    padding: 8px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .remove-btn {
+    background: #e44959;
+    color: white;
+    padding: 8px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  

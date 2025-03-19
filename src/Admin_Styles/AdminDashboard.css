@@ -1,0 +1,94 @@
+/* Admin Dashboard Styles */
+.admin-container {
+  display: flex;
+  height: 100vh;
+  background-color: white; 
+}
+
+/* Dashboard Content */
+.dashboard-content {
+  flex-grow: 1;
+  padding: 30px;
+  background: white;
+  transition: all 0.3s ease-in-out;
+  margin-left: 200px;
+}
+
+/* Dashboard Title */
+h1 {
+  text-align: center;
+  font-size: 28px;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Stats Container */
+.stats-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Stat Cards - Transparent with Soft Shadow */
+.stat-card {
+  width: 220px;
+  padding: 20px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.8); 
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: #333;
+  font-weight: bold;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.stat-card p {
+  font-size: 16px;
+  color: #555;
+  margin-top: 5px;
+}
+
+
+.stat-card h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #222;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stat-card {
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+
+@media (max-width: 768px) {
+  .stats-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .stat-card {
+    width: 80%;
+  }
+}

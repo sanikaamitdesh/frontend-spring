@@ -1,0 +1,93 @@
+.admin-container {
+    display: flex;
+}
+  
+.document-management-container {
+    flex: 1;
+    padding: 20px;
+}
+  
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+  
+h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+  
+.upload-section,
+.templates-list,
+.history,
+.pending-requests {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+  
+input[type="file"] {
+    padding: 5px;
+}
+  
+button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+  
+.approve-btn {
+    background-color: #28a745;
+    color: white;
+}
+  
+.approve-btn:hover {
+    background-color: #218838;
+}
+  
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+  
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+  
+th {
+    background-color: #007bff;
+    color: white;
+}
+  
+tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+
+.back-button {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+}
