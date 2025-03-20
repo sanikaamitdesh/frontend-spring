@@ -1,0 +1,78 @@
+/* Notification.css */
+
+/* Notification Icon Button */
+.notification-button {
+    position: relative;
+    padding: 8px;
+    background: #f3f4f6;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .notification-button:hover {
+    background: #e5e7eb;
+  }
+  
+  /* Red dot for unread notifications */
+  .notification-badge {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 8px;
+    height: 8px;
+    background: red;
+    border-radius: 50%;
+  }
+  
+  /* Dropdown container */
+  .notification-dropdown {
+    position: absolute;
+    right: 0;
+    margin-top: 8px;
+    width: 250px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  /* Dropdown Header */
+  .notification-header {
+    padding: 10px;
+    font-weight: bold;
+    background: #f1f5f9;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  /* Notification list */
+  .notification-list {
+    max-height: 180px;
+    overflow-y: auto;
+  }
+  
+  /* Each Notification Item */
+  .notification-item {
+    padding: 12px;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 14px;
+    transition: background 0.2s;
+  }
+  
+  /* Highlight Unread Notifications */
+  .notification-item.unread {
+    background: #f9fafb;
+    font-weight: 500;
+  }
+  
+  .notification-item:last-child {
+    border-bottom: none;
+  }
+  
+  /* No notifications message */
+  .no-notifications {
+    padding: 12px;
+    text-align: center;
+    color: #6b7280;
+  }
+  

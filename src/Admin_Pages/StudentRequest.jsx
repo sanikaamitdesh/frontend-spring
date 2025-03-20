@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaArrowLeft } from "react-icons/fa"; // Back Button Icon
+import { FaArrowLeft } from "react-icons/fa"; 
 import "../Admin_Styles/UserManagement.css";
 
 const UserManagement = () => {

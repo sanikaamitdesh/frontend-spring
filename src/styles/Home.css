@@ -1,5 +1,4 @@
-/* ✅ Full Layout Styling */
-.home-container {
+home-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;

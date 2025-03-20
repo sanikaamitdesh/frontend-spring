@@ -1,93 +1,71 @@
-.admin-container {
-    display: flex;
-}
-  
-.document-management-container {
-    flex: 1;
+.document-container {
     padding: 20px;
-}
+  }
   
-h2 {
+  .section-title {
     font-size: 24px;
+    font-weight: bold;
+    text-align: center;
     margin-bottom: 20px;
-}
+  }
   
-h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-  
-.upload-section,
-.templates-list,
-.history,
-.pending-requests {
-    background: white;
+  .card {
+    background: #fff;
     padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
-}
+  }
   
-input[type="file"] {
-    padding: 5px;
-}
+  h3 {
+    color: #333;
+    margin-bottom: 10px;
+  }
   
-button {
-    padding: 8px 12px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-left: 10px;
-}
-  
-.approve-btn {
-    background-color: #28a745;
-    color: white;
-}
-  
-.approve-btn:hover {
-    background-color: #218838;
-}
-  
-table {
+  table {
     width: 100%;
     border-collapse: collapse;
-}
+    margin-top: 10px;
+  }
   
-th, td {
+  th, td {
+    border: 1px solid #ddd;
     padding: 10px;
     text-align: left;
-    border-bottom: 1px solid #ddd;
-}
+  }
   
-th {
+  th {
     background-color: #007bff;
     color: white;
-}
+  }
   
-tbody tr:hover {
-    background-color: #f1f1f1;
-}
-
-
-.back-button {
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .approve-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .approve-btn:hover {
+    background-color: #218838;
+  }
+  
+  .back-icon {
+    font-size: 24px;
+    cursor: pointer;
     position: absolute;
     top: 15px;
     left: 15px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 18px;
-    transition: background 0.3s ease;
-}
-
-.back-button:hover {
-    background-color: #0056b3;
-}
+    color: #333;
+  }
+  
+  .back-icon:hover {
+    color: #007bff;
+  }
+  
