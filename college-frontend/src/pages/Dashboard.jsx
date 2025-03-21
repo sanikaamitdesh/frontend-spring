@@ -32,6 +32,35 @@ const Dashboard = () => {
             });
     }, []);
 
+    // const handleRequestSubmit = () => {
+    //     if (!selectedDocument || !reason) {
+    //         alert("Please select a document and enter a reason before submitting request.");
+    //         return;
+    //     }
+    
+    //     const prnNo = student ? student.prnNo : localStorage.getItem("prnNo"); // Get PRN from local storage
+    //     if (!prnNo) {
+    //         alert("PRN not found. Please complete your profile.");
+    //         return;
+    //     }
+    
+    //     axios.post("http://localhost:8080/document-requests/create", null, {
+    //         params: {
+    //             prnNo: prnNo,
+    //             documentType: selectedDocument,
+    //             reason: reason
+    //         }
+    //     })
+    //     .then(response => {
+    //         alert(`Request submitted for ${selectedDocument} with reason: ${reason}`);
+    //         setSelectedDocument("");
+    //         setReason("");
+    //     })
+    //     .catch(error => {
+    //         console.error("Error submitting request:", error);
+    //         alert("Failed to submit request. Please try again.");
+    //     });
+    // };
     const handleRequestSubmit = () => {
         if (!selectedDocument || !reason) {
             alert("Please select a document and enter a reason before submitting request.");
@@ -48,7 +77,9 @@ const Dashboard = () => {
             params: {
                 prnNo: prnNo,
                 documentType: selectedDocument,
-                reason: reason
+                reason: reason,
+                status: false,  // Default to "Pending"
+                document: ""    // Initially empty
             }
         })
         .then(response => {
@@ -61,6 +92,7 @@ const Dashboard = () => {
             alert("Failed to submit request. Please try again.");
         });
     };
+    
     
 
     return (
