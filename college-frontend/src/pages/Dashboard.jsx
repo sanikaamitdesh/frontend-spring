@@ -78,7 +78,7 @@ const Dashboard = () => {
                 prnNo: prnNo,
                 documentType: selectedDocument,
                 reason: reason,
-                status: false,  // Default to "Pending"
+                status: 1,  // Default to "Pending"
                 document: ""    // Initially empty
             }
         })

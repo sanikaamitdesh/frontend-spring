@@ -35,6 +35,7 @@ const StudentForm = () => {
       // ✅ Store email and rollNo in localStorage
       localStorage.setItem("userEmail", student.email);
       localStorage.setItem("rollNo", student.rollNo);
+      localStorage.setItem("prnNo", student.prnNo);
 
       alert("Student Registered Successfully!");
     } catch (error) {
