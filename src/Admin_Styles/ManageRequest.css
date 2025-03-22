@@ -7,7 +7,6 @@
     margin: auto;
 }
 
-
 .back-button {
     display: flex;
     align-items: center;
@@ -28,14 +27,12 @@
     background: #217dbb;
 }
 
-
 h2 {
     text-align: center;
     font-size: 24px;
     margin-bottom: 15px;
     color: #2a3f54;
 }
-
 
 .search-filter-container {
     display: flex;
@@ -63,7 +60,6 @@ h2 {
     font-size: 14px;
 }
 
-
 table {
     width: 100%;
     border-collapse: collapse;
@@ -71,7 +67,7 @@ table {
 }
 
 th, td {
-    padding: 15px;
+    padding: 10px;
     text-align: left;
     border-bottom: 1px solid #ddd;
 }
@@ -80,7 +76,6 @@ th {
     background: #3498db;
     color: white;
 }
-
 
 td.pending {
     color: orange;
@@ -97,12 +92,11 @@ td.rejected {
     font-weight: bold;
 }
 
-
 .action-buttons {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 8px;
+    gap: 5px;
 }
 
 .action-buttons button {
@@ -110,8 +104,8 @@ td.rejected {
     align-items: center;
     justify-content: center;
     gap: 5px;
-    padding: 8px 15px;
-    font-size: 14px;
+    padding: 5px 10px;
+    font-size: 12px;
     font-weight: bold;
     border-radius: 5px;
     cursor: pointer;
@@ -135,4 +129,21 @@ td.rejected {
 
 .reject-btn:hover {
     background-color: #c82333;
+}
+
+.upload-column {
+    width: 200px;
+    text-align: center;
+}
+
+.upload-column input[type='file'] {
+    width: 100px;
+    font-size: 10px;
+    padding: 5px;
+}
+
+.upload-column button {
+    font-size: 10px;
+    padding: 5px 5px;
+    margin-top: 3px;
 }

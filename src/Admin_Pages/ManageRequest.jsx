@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FaCheck, FaTimes, FaFilter, FaSearch, FaArrowLeft } from "react-icons/fa";
+import { FaCheck, FaTimes, FaFilter, FaSearch, FaArrowLeft, FaUpload } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import "../Admin_Styles/ManageRequest.css";
 
@@ -8,8 +8,8 @@ const ManageRequests = () => {
   const [requests, setRequests] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
+  const [files, setFiles] = useState({});
 
-  // ✅ Convert status int to string
   const getStatusText = (status) => {
     switch (status) {
       case 1:
@@ -23,54 +23,83 @@ const ManageRequests = () => {
     }
   };
 
-  // ✅ Fetch requests from backend
   useEffect(() => {
     fetch("http://localhost:8080/document-requests")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Fetched Requests:", data);
-        setRequests(data);
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to fetch requests");
+        }
+        return response.json();
       })
+      .then((data) => setRequests(data))
       .catch((error) => console.error("Error fetching requests:", error));
   }, []);
 
-  // ✅ Approve request
-  const handleApprove = (id) => {
+  const handleFileChange = (event, id) => {
+    setFiles((prevFiles) => ({ ...prevFiles, [id]: event.target.files[0] }));
+  };
+
+  const handleUpload = async (id) => {
+    if (!files[id]) {
+      alert("Please select a file first.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", files[id]);
+
+    try {
+      const response = await fetch(`http://localhost:8080/document-requests/upload/${id}`, {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Upload failed.");
+      }
+
+      alert("File uploaded successfully!");
+    } catch (error) {
+      console.error("Error uploading file:", error);
+      alert("Upload failed. Please try again.");
+    }
+  };
+
+  const handleApprove = async (id) => {
     if (window.confirm("Are you sure you want to approve this request?")) {
-      fetch(`http://localhost:8080/document-requests/${id}/approve`, { method: "PUT" })
-        .then((response) => response.json())
-        .then(() => {
-          setRequests((prevRequests) =>
-            prevRequests.map((req) =>
-              req.id === id ? { ...req, status: 2 } : req
-            )
-          );
-        })
-        .catch((error) => console.error("Error approving request:", error));
+      try {
+        await fetch(`http://localhost:8080/document-requests/${id}/approve`, { method: "PUT" });
+
+        setRequests((prevRequests) =>
+          prevRequests.map((req) => (req.id === id ? { ...req, status: 2 } : req))
+        );
+      } catch (error) {
+        console.error("Error approving request:", error);
+      }
     }
   };
 
-  // ✅ Reject request
-  const handleReject = (id) => {
+  const handleReject = async (id) => {
     if (window.confirm("Are you sure you want to reject this request?")) {
-      fetch(`http://localhost:8080/document-requests/${id}/reject`, { method: "PUT" })
-        .then((response) => response.json())
-        .then(() => {
-          setRequests((prevRequests) =>
-            prevRequests.map((req) =>
-              req.id === id ? { ...req, status: 3 } : req
-            )
-          );
-        })
-        .catch((error) => console.error("Error rejecting request:", error));
+      try {
+        await fetch(`http://localhost:8080/document-requests/${id}/reject`, { method: "PUT" });
+
+        setRequests((prevRequests) =>
+          prevRequests.map((req) => (req.id === id ? { ...req, status: 3 } : req))
+        );
+      } catch (error) {
+        console.error("Error rejecting request:", error);
+      }
     }
   };
 
-  // ✅ Filtered request list based on search and status
   const filteredRequests = requests.filter((request) => {
     const statusText = getStatusText(request.status);
     return (
-      (request.student?.prnNo?.includes(searchQuery) ||
+      (request.student?.prnNo?.toLowerCase().includes(searchQuery.toLowerCase()) ||
         request.documentType?.toLowerCase().includes(searchQuery.toLowerCase())) &&
       (statusFilter === "All" || statusText === statusFilter)
     );
@@ -95,10 +124,7 @@ const ManageRequests = () => {
         </div>
         <div className="filter-box">
           <FaFilter className="filter-icon" />
-          <select
-            value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value)}
-          >
+          <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
             <option value="All">All Status</option>
             <option value="Pending">Pending</option>
             <option value="Approved">Approved</option>
@@ -114,31 +140,32 @@ const ManageRequests = () => {
             <th>Requested Document</th>
             <th>Reason</th>
             <th>Status</th>
+            <th>Upload Document</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
           {filteredRequests.map((request) => (
             <tr key={request.id}>
-              <td>{request.student?.prnNo}</td>
+              <td>{request.student?.prnNo || "N/A"}</td>
               <td>{request.documentType}</td>
               <td>{request.reason}</td>
               <td className={getStatusText(request.status).toLowerCase()}>
                 {getStatusText(request.status)}
               </td>
+              <td className="upload-column">
+                <input type="file" onChange={(e) => handleFileChange(e, request.id)} className="file-input" />
+                <button className="upload-btn" onClick={() => handleUpload(request.id)}>
+                  <FaUpload />
+                </button>
+              </td>
               <td className="action-buttons">
                 {request.status === 1 && (
                   <>
-                    <button
-                      className="approve-btn"
-                      onClick={() => handleApprove(request.id)}
-                    >
+                    <button className="approve-btn" onClick={() => handleApprove(request.id)}>
                       <FaCheck /> Approve
                     </button>
-                    <button
-                      className="reject-btn"
-                      onClick={() => handleReject(request.id)}
-                    >
+                    <button className="reject-btn" onClick={() => handleReject(request.id)}>
                       <FaTimes /> Reject
                     </button>
                   </>
