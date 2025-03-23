@@ -62,18 +62,19 @@ const StatusPage = () => {
                                     <td>{req.student?.prnNo || "N/A"}</td>
                                     <td>{getStatusText(req.status)}</td>
                                     <td>
-                                        {req.document ? (
-                                            <a
-                                                href={req.document}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                            >
-                                                View Document
-                                            </a>
-                                        ) : (
-                                            "Not Uploaded"
-                                        )}
-                                    </td>
+    {req.documentName ? (
+        <a
+            href={`http://localhost:8080/document-requests/${req.id}/download`}
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            Download {req.documentName}
+        </a>
+    ) : (
+        "Not Uploaded"
+    )}
+</td>
+
                                 </tr>
                             ))}
                         </tbody>

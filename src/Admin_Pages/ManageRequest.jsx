@@ -9,6 +9,7 @@ const ManageRequests = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
   const [files, setFiles] = useState({});
+  
 
   const getStatusText = (status) => {
     switch (status) {
@@ -154,11 +155,22 @@ const ManageRequests = () => {
                 {getStatusText(request.status)}
               </td>
               <td className="upload-column">
-                <input type="file" onChange={(e) => handleFileChange(e, request.id)} className="file-input" />
-                <button className="upload-btn" onClick={() => handleUpload(request.id)}>
-                  <FaUpload />
-                </button>
-              </td>
+  {request.status === 2 ? (
+    <>
+      <input
+        type="file"
+        onChange={(e) => handleFileChange(e, request.id)}
+        className="file-input"
+      />
+      <button className="upload-btn" onClick={() => handleUpload(request.id)}>
+        <FaUpload />
+      </button>
+    </>
+  ) : (
+    <span style={{ color: "#999" }}>Only after approval</span>
+  )}
+</td>
+
               <td className="action-buttons">
                 {request.status === 1 && (
                   <>

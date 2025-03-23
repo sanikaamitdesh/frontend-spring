@@ -23,7 +23,8 @@ const Dashboard = () => {
             .then(response => {
                 if (response.data) {
                     setStudent(response.data); // Set student details if found
-                    localStorage.setItem("rollNo", response.data.rollNo); // Store rollNo for future requests
+                    localStorage.setItem("rollNo", response.data.rollNo);
+                    localStorage.setItem("prnNo", response.data.prnNo); // Store rollNo for future requests
                 }
             })
             .catch(error => {

@@ -37,7 +37,7 @@ const Sidebar = () => {
           <FaCog className="icon" /> {isOpen && "Settings"}
         </Link>
 
-        <Link to="/logout" className="menu-item logout">
+        <Link to="/" className="menu-item logout">
           <FaSignOutAlt className="icon" /> {isOpen && "Logout"}
         </Link>
       </nav>

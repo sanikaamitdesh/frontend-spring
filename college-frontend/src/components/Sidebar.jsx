@@ -31,6 +31,7 @@ const Sidebar = () => {
     const handleLogout = () => {
         // Clear authentication-related data if any
         localStorage.removeItem("token");
+        localStorage.removeItem("rollNo");
         localStorage.removeItem("rollNo"); // If using JWT authentication
         sessionStorage.clear(); // If using session storage
 
