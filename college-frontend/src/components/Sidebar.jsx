@@ -23,7 +23,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/Sidebar.css";
-import logo from "../Img/pic.jpg"; // Add your logo image
+import logo from "../Img/pic.jpg" // Add your logo image
 
 const Sidebar = () => {
     const navigate = useNavigate();

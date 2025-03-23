@@ -183,6 +183,30 @@ const ManageRequests = () => {
                   </>
                 )}
               </td>
+              {request.status === 2 && (
+  <button
+    className="generate-btn"
+    onClick={async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:8080/document-requests/${request.id}/generate-and-upload`,
+          {
+            method: "POST",
+          }
+        );
+
+        if (!response.ok) throw new Error("PDF generation failed");
+        alert("PDF generated and uploaded!");
+      } catch (error) {
+        console.error("Error generating PDF:", error);
+        alert("PDF generation failed.");
+      }
+    }}
+  >
+    Generate PDF
+  </button>
+)}
+
             </tr>
           ))}
         </tbody>
