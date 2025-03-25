@@ -1,4 +1,4 @@
-// src/pages/StatusPage.jsx
+
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Sidebar from "../components/Sidebar";
@@ -27,16 +27,15 @@ const StatusPage = () => {
     const getStatusText = (status) => {
         switch (status) {
             case 1:
-                return "Pending";
+                return { text: "⏳ Pending", color: "orange" };
             case 2:
-                return "Approved";
+                return { text: "✅ Approved", color: "green" };
             case 3:
-                return "Rejected";
+                return { text: "❌ Rejected", color: "red" };
             default:
-                return "Pending";
+                return { text: "⏳ Pending", color: "orange" };
         }
     };
-    
 
     return (
         <div className="container">
@@ -49,34 +48,36 @@ const StatusPage = () => {
                     <table className="status-table">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>PRN</th>
+                                <th>Document Type</th>
                                 <th>Status</th>
                                 <th>Document</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {requests.map((req) => (
-                                <tr key={req.id}>
-                                    <td>{req.student?.name || "N/A"}</td>
-                                    <td>{req.student?.prnNo || "N/A"}</td>
-                                    <td>{getStatusText(req.status)}</td>
-                                    <td>
-    {req.documentName ? (
-        <a
-            href={`http://localhost:8080/document-requests/${req.id}/download`}
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-            Download {req.documentName}
-        </a>
-    ) : (
-        "Not Uploaded"
-    )}
-</td>
-
-                                </tr>
-                            ))}
+                            {requests.map((req) => {
+                                const statusInfo = getStatusText(req.status);
+                                return (
+                                    <tr key={req.id}>
+                                        <td>{req.documentType || "N/A"}</td>
+                                        <td style={{ color: statusInfo.color, fontWeight: "bold" }}>
+                                            {statusInfo.text}
+                                        </td>
+                                        <td>
+                                            {req.documentName ? (
+                                                <a
+                                                    href={`http://localhost:8080/document-requests/${req.id}/download`}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                >
+                                                    Download {req.documentName}
+                                                </a>
+                                            ) : (
+                                                "Not Uploaded"
+                                            )}
+                                        </td>
+                                    </tr>
+                                );
+                            })}
                         </tbody>
                     </table>
                 )}
@@ -86,3 +87,4 @@ const StatusPage = () => {
 };
 
 export default StatusPage;
+

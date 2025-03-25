@@ -1,25 +1,3 @@
-// import React from "react";
-// import { Link } from "react-router-dom";
-// import "../styles/Sidebar.css";
-// import logo from "../Img/pic.jpg" // Add your logo image
-
-// const Sidebar = () => {
-//     return (
-//         <div className="sidebar">
-//             <img src={logo} alt="SPPU Logo" className="logo" />
-           
-//             <ul>
-//                 <li><Link to="/student-dashboard">Dashboard</Link></li>
-//                 <li><Link to="/Messages">Messages</Link></li>
-//                 <li><Link to="/notifications">Notifications</Link></li>
-//                 <li><Link to="/logout">Log Out</Link></li>
-//             </ul>
-//         </div>
-//     );
-// };
-
-// export default Sidebar;
-
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/Sidebar.css";
@@ -58,3 +36,4 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+
