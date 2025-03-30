@@ -209,6 +209,43 @@ const StudentDashboard = () => {
   const handleFileUpload = (event) => {
     setFile(event.target.files[0]);
   };
+  const handleVerificationUpload = async () => {
+    if (!file) {
+      alert("Please select a file before uploading.");
+      return;
+    }
+  
+    const studentId = student ? student.id : null;
+    if (!studentId) {
+      alert("Student ID not found. Please log in again.");
+      return;
+    }
+  
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("reason", reason); // Add reason to the request
+  
+    try {
+      const response = await axios.post(
+        `http://localhost:8080/document-requests/${studentId}/upload-verification`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+  
+      alert(response.data);
+      setFile(null);
+      setReason(""); // Reset reason input after submission
+    } catch (error) {
+      console.error("Error uploading verification document:", error);
+      alert("Failed to upload verification document.");
+    }
+  };
+  
+  
 
   const handlePhotoUpload = (event) => {
     setPhoto(event.target.files[0]);
