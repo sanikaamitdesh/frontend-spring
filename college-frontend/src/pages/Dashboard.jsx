@@ -250,47 +250,60 @@ const StudentDashboard = () => {
   const handlePhotoUpload = (event) => {
     setPhoto(event.target.files[0]);
   };
-
-  const handleRequestSubmit = () => {
+  const handleRequestSubmit = async () => {
     if (!documentType || !reason) {
       alert("Please select a document and enter a reason before submitting request.");
       return;
     }
-
-    if (documentType === "ID Card" && (!photo || !address)) {
-      alert("Please upload a photo and enter your address for the ID card request.");
-      return;
-    }
-
+  
     const prnNo = student ? student.prnNo : localStorage.getItem("prnNo");
     if (!prnNo) {
       alert("PRN not found. Please complete your profile.");
       return;
     }
-
-    axios.post("http://localhost:8080/document-requests/create", null, {
-      params: {
-        prnNo: prnNo,
-        documentType: documentType,
-        reason: reason,
-        status: 1,
-        document: file ? file.name : "",
-      },
-    })
-    .then(response => {
+  
+    try {
+      const response = await axios.post("http://localhost:8080/document-requests/create", null, {
+        params: {
+          prnNo: prnNo,
+          documentType: documentType,
+          reason: reason,
+          status: 1,
+        },
+      });
+  
+      const requestId = response.data.id; // ✅ Get document request ID from backend
+  
       alert(`Request submitted for ${documentType} with reason: ${reason}`);
+  
+      // ✅ Upload the verification file right after request creation
+      if (file) {
+        const formData = new FormData();
+        formData.append("file", file);
+  
+        await axios.post(
+          `http://localhost:8080/document-requests/${requestId}/upload-verification`,
+          formData,
+          {
+            headers: { "Content-Type": "multipart/form-data" },
+          }
+        );
+  
+        alert("Verification document uploaded!");
+      }
+  
+      // Reset form
       setDocumentType("");
       setReason("");
       setFile(null);
       setPhoto(null);
       setAddress("");
-    })
-    .catch(error => {
+    } catch (error) {
       console.error("Error submitting request:", error);
       alert("Failed to submit request. Please try again.");
-    });
+    }
   };
-
+  
   return (
     <motion.div className="main-container" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}>
       <Sidebar />

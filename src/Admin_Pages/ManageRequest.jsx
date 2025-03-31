@@ -229,6 +229,7 @@ const ManageRequests = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
   const [files, setFiles] = useState({});
+  const [yearFilter, setYearFilter] = useState("All");
 
   const getStatusText = (status) => {
     switch (status) {
@@ -318,13 +319,18 @@ const ManageRequests = () => {
 
   const filteredRequests = requests.filter((request) => {
     const statusText = getStatusText(request.status);
-    return (
-      (request.student?.prnNo?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        request.documentType?.toLowerCase().includes(searchQuery.toLowerCase())) &&
-      (statusFilter === "All" || statusText === statusFilter)
-    );
+    const studentYear = request.student?.year;
+  
+    const matchesSearch =
+      request.student?.prnNo?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      request.documentType?.toLowerCase().includes(searchQuery.toLowerCase());
+  
+    const matchesStatus = statusFilter === "All" || statusText === statusFilter;
+    const matchesYear = yearFilter === "All" || studentYear === yearFilter;
+  
+    return matchesSearch && matchesStatus && matchesYear;
   });
-
+  
   return (
     <div className="manage-requests">
       <button className="back-button" onClick={() => navigate(-1)}>
@@ -342,6 +348,21 @@ const ManageRequests = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
+        <div className="filter-box">
+  <label htmlFor="yearFilter">Year</label>
+  <select
+    id="yearFilter"
+    value={yearFilter}
+    onChange={(e) => setYearFilter(e.target.value)}
+  >
+    <option value="All">All Years</option>
+    <option value="FE">FE</option>
+    <option value="SE">SE</option>
+    <option value="TE">TE</option>
+    <option value="BE">BE</option>
+  </select>
+</div>
+
         <div className="filter-box">
           <FaFilter className="filter-icon" />
           <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
@@ -413,6 +434,26 @@ const ManageRequests = () => {
                     </button>
                   </>
                 )}
+                {request.status === 2 && (
+    <button
+      className="generate-btn"
+      onClick={async () => {
+        try {
+          const response = await fetch(
+            `http://localhost:8080/document-requests/${request.id}/generate-and-upload`,
+            { method: "POST" }
+          );
+          if (!response.ok) throw new Error("PDF generation failed");
+          alert("PDF generated and uploaded!");
+        } catch (error) {
+          console.error("Error generating PDF:", error);
+          alert("PDF generation failed.");
+        }
+      }}
+    >
+      Generate PDF
+    </button>
+  )}
               </td>
             </tr>
           ))}
