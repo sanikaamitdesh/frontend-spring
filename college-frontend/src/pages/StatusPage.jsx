@@ -20,7 +20,7 @@ const StatusPage = () => {
                 setRequests(response.data);
             })
             .catch(error => {
-                console.error("Error fetching request status:", error);
+                console.error("Error fetching request status try again:", error);
             });
     }, []);
 

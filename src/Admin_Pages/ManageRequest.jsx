@@ -447,7 +447,7 @@ const ManageRequests = () => {
           alert("PDF generated and uploaded!");
         } catch (error) {
           console.error("Error generating PDF:", error);
-          alert("PDF generation failed.");
+          alert("PDF generation faiiiled.");
         }
       }}
     >
