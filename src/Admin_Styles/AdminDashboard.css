@@ -1,94 +1,117 @@
-/* Admin Dashboard Styles */
+/* Main container layout */
 .admin-container {
   display: flex;
-  height: 100vh;
-  background-color: white; 
+  min-height: 100vh;
+  background-color: #f9fbfc;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  /* padding-left: 15rem; */
+}
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  align-items: center;
 }
 
-/* Dashboard Content */
+.filter-bar select,
+.filter-bar input {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  min-width: 180px;
+}
+
+.filter-bar input {
+  flex: 1;
+}
+
+/* Right side content area */
 .dashboard-content {
-  flex-grow: 1;
-  padding: 30px;
-  background: white;
-  transition: all 0.3s ease-in-out;
-  margin-left: 200px;
+  margin-left: 240px; /* match sidebar width */
+  padding: 2rem;
+  background-color: #f9fbfc;
+  overflow-y: auto;
 }
 
-/* Dashboard Title */
-h1 {
-  text-align: center;
-  font-size: 28px;
-  color: #333;
-  font-weight: bold;
-  margin-bottom: 20px;
+
+/* Title */
+.dashboard-content h1 {
+  font-size: 2.2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: #2c3e50;
 }
 
-/* Stats Container */
+/* Stat cards layout */
 .stats-container {
   display: flex;
-  justify-content: space-around;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
 }
 
-/* Stat Cards - Transparent with Soft Shadow */
+/* Individual card */
 .stat-card {
-  width: 220px;
-  padding: 20px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.8); 
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  flex: 1 1 200px;
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   text-align: center;
-  color: #333;
-  font-weight: bold;
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  transition: transform 0.2s ease-in-out;
+  min-width: 160px;
 }
 
 .stat-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.15);
+}
+
+.stat-card h2 {
+  font-size: 2.2rem;
+  color: #4a76fd;
+  margin-bottom: 0.25rem;
 }
 
 .stat-card p {
-  font-size: 16px;
+  font-size: 1rem;
   color: #555;
-  margin-top: 5px;
+  margin: 0;
 }
 
-
-.stat-card h2 {
-  font-size: 24px;
-  font-weight: bold;
-  color: #222;
+/* Chart section */
+.chart-section {
+  background-color: #ffffff;
+  padding: 1.5rem 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2rem;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.chart-section h2 {
+  font-size: 1.6rem;
+  margin-bottom: 1.2rem;
+  color: #2c3e50;
 }
 
-.stat-card {
-  animation: fadeIn 0.8s ease-in-out;
-}
-
-
+/* Responsive tweaks */
 @media (max-width: 768px) {
   .stats-container {
     flex-direction: column;
-    align-items: center;
   }
 
   .stat-card {
-    width: 80%;
+    flex: 1 1 100%;
+  }
+
+  .dashboard-content {
+    padding: 1rem;
+  }
+
+  .chart-section {
+    padding: 1rem;
   }
 }
