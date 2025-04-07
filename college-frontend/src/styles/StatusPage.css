@@ -78,6 +78,23 @@ h2 {
     text-decoration: underline;
 }
 
+.document-actions {
+    display: flex;
+    align-items: center;
+  }
+  
+  .doc-link {
+    text-decoration: none;
+    margin: 0 2px;
+    font-weight: 500;
+    color: #007bff;
+  }
+  
+  .doc-link:hover {
+    text-decoration: underline;
+  }
+  
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .container {
