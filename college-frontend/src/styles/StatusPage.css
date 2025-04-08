@@ -1,113 +1,52 @@
-.container {
-    display: flex;
-    height: 100vh;
-}
-
-.main-content {
-    flex: 1;
+.status-content {
     padding: 20px;
-    background-color: #f5f5f5;
-    overflow-y: auto;
-}
-
-h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
-}
-
-/* Student Info Box */
-.student-info {
-    background: #ffffff;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-}
-
-.student-info p {
-    margin: 5px 0;
-    font-size: 16px;
-    color: #444;
-}
-
-.student-info strong {
-    color: #000;
-}
-
-/* Table Styling */
-.status-table {
     width: 100%;
-    border-collapse: collapse;
-    background: #fff;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.status-table th, 
-.status-table td {
-    padding: 12px;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
-}
-
-.status-table th {
-    background: #007bff;
-    color: #fff;
-    font-weight: bold;
-}
-
-.status-table tr:hover {
-    background: #f1f1f1;
-}
-
-/* Status Colors */
-.status-table td {
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.status-table a {
-    text-decoration: none;
-    color: #007bff;
-    font-weight: bold;
-}
-
-.status-table a:hover {
-    text-decoration: underline;
-}
-
-.document-actions {
-    display: flex;
-    align-items: center;
+    margin-left: 220px; /* Adjusted to align properly next to the sidebar */
   }
   
+  .status-title {
+    margin: 0 0 15px 10px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  /* Table */
+  .status-table {
+    width: 95%;
+    margin-left: 10px;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    font-size: 15px;
+  }
+  
+  .status-table th,
+  .status-table td {
+    padding: 12px 16px;
+    text-align: left;
+    border: 1px solid #ccc;
+  }
+  
+  .status-table th {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  /* Link */
   .doc-link {
-    text-decoration: none;
-    margin: 0 2px;
-    font-weight: 500;
     color: #007bff;
+    text-decoration: none;
+    margin: 0 4px;
+    font-weight: 500;
   }
   
   .doc-link:hover {
     text-decoration: underline;
   }
   
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-    }
-
-    .main-content {
-        padding: 15px;
-    }
-
-    .status-table th, 
-    .status-table td {
-        padding: 8px;
-        font-size: 14px;
-    }
-}
+  .divider {
+    color: #999;
+    margin: 0 4px;
+  }
+  

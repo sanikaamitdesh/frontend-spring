@@ -1,56 +1,66 @@
-import React, { useState } from "react";
-import Sidebar from "../components/Sidebar.jsx";
-import "../styles/History.css";  
+import React from 'react';
+import '../styles/History.css';
+import Sidebar from '../components/Sidebar.jsx';
 
-const History = () => {
-    const [history, setHistory] = useState([
-        { id: 201, document: "Bonafide Certificate", date: "10-Feb-2025", status: "approved" },
-        { id: 202, document: "Marksheet", date: "05-Feb-2025", status: "rejected" },
-        { id: 203, document: "Leaving Certificate", date: "02-Feb-2025", status: "completed" },
-    ]);
-
-    return (
-        <div className="container">
-            <Sidebar />
-            <div className="main-content">
-                <h2>Request History</h2>
-                <table className="history-table">
-                    <thead>
-                        <tr>
-                            <th>Request ID</th>
-                            <th>Document Type</th>
-                            <th>Date</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {history.map((req) => (
-                            <tr key={req.id}>
-                                <td>{req.id}</td>
-                                <td>{req.document}</td>
-                                <td>{req.date}</td>
-                                <td>
-                                    <span className={`status ${req.status}`}>
-                                        {req.status.charAt(0).toUpperCase() + req.status.slice(1)}
-                                    </span>
-                                </td>
-                                <td>
-                                    {req.status === "approved" ? (
-                                        <button className="download-btn">Download</button>
-                                    ) : req.status === "rejected" ? (
-                                        <button className="reapply-btn">Reapply</button>
-                                    ) : (
-                                        <span>✔ Completed</span>
-                                    )}
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+const History = ({ requests }) => {
+  return (
+    <div className="history-layout">
+      <Sidebar /> {/* Sidebar on the left */}
+      <div className="history-page">
+        <h2 className="title">Request History</h2>
+        <div className="table-container">
+          <table className="history-table">
+            <thead>
+              <tr>
+                <th>Request ID</th>
+                <th>Document Type</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {requests && requests.length > 0 ? (
+                requests.map((req) => (
+                  <tr key={req.id}>
+                    <td>{req.id}</td>
+                    <td>{req.documentType}</td>
+                    <td>{req.date}</td>
+                    <td>
+                      <span
+                        className={`status ${
+                          req.status === 'Completed'
+                            ? 'completed'
+                            : req.status === 'Rejected'
+                            ? 'rejected'
+                            : ''
+                        }`}
+                      >
+                        {req.status}
+                      </span>
+                    </td>
+                    <td>
+                      {req.status === 'Completed' ? (
+                        <button className="btn download">Download</button>
+                      ) : req.status === 'Rejected' ? (
+                        <button className="btn reapply">Reapply</button>
+                      ) : (
+                        '—'
+                      )}
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="5">No history available</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default History;

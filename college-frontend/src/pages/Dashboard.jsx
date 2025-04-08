@@ -337,7 +337,7 @@ const StudentDashboard = () => {
               <Link to="/History" className="tab">Request History</Link>
             </div>
 
-            <div className="form-group">
+            {/* <div className="form-group">
               <label>Important Information</label>
               <p className="info-text">
                 📌 Bonafide Certificate: Upload Last Semester Marksheet <br />
@@ -346,7 +346,7 @@ const StudentDashboard = () => {
                 📌 Hall Ticket: Upload Previous Semester Marksheet <br />
                 📌 ID Card: Upload Your Photo and Enter Address
               </p>
-            </div>
+            </div> */}
 
             <div className="form-group">
               <label>Document Type</label>

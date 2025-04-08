@@ -1,93 +1,109 @@
-
 // import React, { useEffect, useState } from "react";
 // import axios from "axios";
 // import Sidebar from "../components/Sidebar";
 // import "../styles/StatusPage.css";
 
 // const StatusPage = () => {
-//     const [requests, setRequests] = useState([]);
+//   const [requests, setRequests] = useState([]);
 
-//     useEffect(() => {
-//         const prnNo = localStorage.getItem("prnNo");
+//   useEffect(() => {
+//     const prnNo = localStorage.getItem("prnNo");
 
-//         if (!prnNo) {
-//             alert("PRN not found. Please complete your profile first.");
-//             return;
-//         }
+//     if (!prnNo) {
+//       alert("PRN not found. Please complete your profile first.");
+//       return;
+//     }
 
-//         axios.get(`http://localhost:8080/document-requests/${prnNo}`)
-//             .then(response => {
-//                 setRequests(response.data);
-//             })
-//             .catch(error => {
-//                 console.error("Error fetching request status try again:", error);
-//             });
-//     }, []);
+//     axios
+//       .get(`http://localhost:8080/document-requests/${prnNo}`)
+//       .then((response) => {
+//         setRequests(response.data);
+//       })
+//       .catch((error) => {
+//         console.error("Error fetching request status:", error);
+//       });
+//   }, []);
 
-//     const getStatusText = (status) => {
-//         switch (status) {
-//             case 1:
-//                 return { text: "⏳ Pending", color: "orange" };
-//             case 2:
-//                 return { text: "✅ Approved", color: "green" };
-//             case 3:
-//                 return { text: "❌ Rejected", color: "red" };
-//             default:
-//                 return { text: "⏳ Pending", color: "orange" };
-//         }
-//     };
+//   const getStatusText = (status) => {
+//     switch (status) {
+//       case 1:
+//         return { text: "⏳ Pending", color: "orange" };
+//       case 2:
+//         return { text: "✅ Approved", color: "green" };
+//       case 3:
+//         return { text: "❌ Rejected", color: "red" };
+//       default:
+//         return { text: "⏳ Pending", color: "orange" };
+//     }
+//   };
 
-//     return (
-//         <div className="container">
-//             <Sidebar />
-//             <div className="main-content">
-//                 <h2>Request Status</h2>
-//                 {requests.length === 0 ? (
-//                     <p>No requests found.</p>
-//                 ) : (
-//                     <table className="status-table">
-//                         <thead>
-//                             <tr>
-//                                 <th>Document Type</th>
-//                                 <th>Status</th>
-//                                 <th>Document</th>
-//                             </tr>
-//                         </thead>
-//                         <tbody>
-//                             {requests.map((req) => {
-//                                 const statusInfo = getStatusText(req.status);
-//                                 return (
-//                                     <tr key={req.id}>
-//                                         <td>{req.documentType || "N/A"}</td>
-//                                         <td style={{ color: statusInfo.color, fontWeight: "bold" }}>
-//                                             {statusInfo.text}
-//                                         </td>
-//                                         <td>
-//                                             {req.documentName ? (
-//                                                 <a
-//                                                     href={`http://localhost:8080/document-requests/${req.id}/download`}
-//                                                     target="_blank"
-//                                                     rel="noopener noreferrer"
-//                                                 >
-//                                                     Download {req.documentName}
-//                                                 </a>
-//                                             ) : (
-//                                                 "Not Uploaded"
-//                                             )}
-//                                         </td>
-//                                     </tr>
-//                                 );
-//                             })}
-//                         </tbody>
-//                     </table>
-//                 )}
-//             </div>
-//         </div>
-//     );
+//   return (
+//     <div className="container">
+//       <Sidebar />
+//       <div className="main-content">
+//         <h2>Request Status</h2>
+//         {requests.length === 0 ? (
+//           <p>No requests found.</p>
+//         ) : (
+//           <table className="status-table">
+//             <thead>
+//               <tr>
+//                 <th>Document Type</th>
+//                 <th>Status</th>
+//                 <th>Document</th>
+//               </tr>
+//             </thead>
+//             <tbody>
+//               {requests.map((req) => {
+//                 const statusInfo = getStatusText(req.status);
+//                 const fileUrl = `http://localhost:8080/document-requests/${req.id}/download`;
+             
+//                 const viewUrl = `http://localhost:8080/document-requests/${req.id}/view`;
+
+//                 return (
+//                   <tr key={req.id}>
+//                     <td>{req.documentType || "N/A"}</td>
+//                     <td style={{ color: statusInfo.color, fontWeight: "bold" }}>
+//                       {statusInfo.text}
+//                     </td>
+//                     <td>
+//                       {req.documentName ? (
+//                         <div className="document-actions">
+//                           <a
+//                             href={viewUrl}
+//                             target="_blank"
+//                             rel="noopener noreferrer"
+//                             title="View Document"
+//                             className="doc-link"
+//                           >
+//                             👁️ View
+//                           </a>
+//                           <span style={{ margin: "0 5px" }}>|</span>
+//                           <a
+//                             href={fileUrl}
+//                             download
+//                             title="Download Document"
+//                             className="doc-link"
+//                           >
+//                             ⬇️ Download
+//                           </a>
+//                         </div>
+//                       ) : (
+//                         "Not Uploaded"
+//                       )}
+//                     </td>
+//                   </tr>
+//                 );
+//               })}
+//             </tbody>
+//           </table>
+//         )}
+//       </div>
+//     </div>
+//   );
 // };
 
 // export default StatusPage;
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Sidebar from "../components/Sidebar";
@@ -106,87 +122,59 @@ const StatusPage = () => {
 
     axios
       .get(`http://localhost:8080/document-requests/${prnNo}`)
-      .then((response) => {
-        setRequests(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching request status:", error);
-      });
+      .then((response) => setRequests(response.data))
+      .catch((error) => console.error("Error fetching request status:", error));
   }, []);
 
   const getStatusText = (status) => {
     switch (status) {
-      case 1:
-        return { text: "⏳ Pending", color: "orange" };
-      case 2:
-        return { text: "✅ Approved", color: "green" };
-      case 3:
-        return { text: "❌ Rejected", color: "red" };
-      default:
-        return { text: "⏳ Pending", color: "orange" };
+      case 1: return { text: "Pending", color: "orange" };
+      case 2: return { text: "Approved", color: "green" };
+      case 3: return { text: "Rejected", color: "red" };
+      default: return { text: "Pending", color: "orange" };
     }
   };
 
   return (
-    <div className="container">
+    <div style={{ display: "flex" }}>
       <Sidebar />
-      <div className="main-content">
-        <h2>Request Status</h2>
-        {requests.length === 0 ? (
-          <p>No requests found.</p>
-        ) : (
-          <table className="status-table">
-            <thead>
-              <tr>
-                <th>Document Type</th>
-                <th>Status</th>
-                <th>Document</th>
-              </tr>
-            </thead>
-            <tbody>
-              {requests.map((req) => {
-                const statusInfo = getStatusText(req.status);
-                const fileUrl = `http://localhost:8080/document-requests/${req.id}/download`;
-                const viewUrl = `http://localhost:8080/document-requests/${req.id}/view`;
+      <div className="status-content">
+        <h3 className="status-title">Request Status</h3>
 
-                return (
-                  <tr key={req.id}>
-                    <td>{req.documentType || "N/A"}</td>
-                    <td style={{ color: statusInfo.color, fontWeight: "bold" }}>
-                      {statusInfo.text}
-                    </td>
-                    <td>
-                      {req.documentName ? (
-                        <div className="document-actions">
-                          <a
-                            href={viewUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            title="View Document"
-                            className="doc-link"
-                          >
-                            👁️ View
-                          </a>
-                          <span style={{ margin: "0 5px" }}>|</span>
-                          <a
-                            href={fileUrl}
-                            download
-                            title="Download Document"
-                            className="doc-link"
-                          >
-                            ⬇️ Download
-                          </a>
-                        </div>
-                      ) : (
-                        "Not Uploaded"
-                      )}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        )}
+        <table className="status-table">
+          <thead>
+            <tr>
+              <th>Document Type</th>
+              <th>Status</th>
+              <th>Document</th>
+            </tr>
+          </thead>
+          <tbody>
+            {requests.map((req) => {
+              const statusInfo = getStatusText(req.status);
+              const fileUrl = `http://localhost:8080/document-requests/${req.id}/download`;
+              const viewUrl = `http://localhost:8080/document-requests/${req.id}/view`;
+
+              return (
+                <tr key={req.id}>
+                  <td>{req.documentType || "N/A"}</td>
+                  <td style={{ color: statusInfo.color, fontWeight: "bold" }}>
+                    {statusInfo.text}
+                  </td>
+                  <td>
+                    {req.documentName ? (
+                      <>
+                        <a href={viewUrl} target="_blank" rel="noreferrer" className="doc-link">👁 View</a>
+                        <span className="divider">|</span>
+                        <a href={fileUrl} download className="doc-link">⬇ Download</a>
+                      </>
+                    ) : "Not Uploaded"}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
     </div>
   );

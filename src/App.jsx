@@ -11,7 +11,7 @@ import UserManagement from "./Admin_Pages/UserManagement.jsx";
 
 
 import Dashboard from "../college-frontend/src/pages/Dashboard";
-import Status from "../college-frontend/src/pages/Status";
+// import Status from "../college-frontend/src/pages/Status";
 import History from "../college-frontend/src/pages/History";
  import StatusPage from "../college-frontend/src/pages/StatusPage";
 import Messages from "../college-frontend/src/pages/Messages";
