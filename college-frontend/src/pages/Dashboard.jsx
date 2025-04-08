@@ -186,25 +186,34 @@ const StudentDashboard = () => {
 
   useEffect(() => {
     const userEmail = localStorage.getItem("userName");
-
+  
+    // Clear old data
+    setStudent(null);
+    localStorage.removeItem("rollNo");
+    localStorage.removeItem("prnNo");
+  
     if (!userEmail) {
       console.error("User not logged in!");
       return;
     }
-
+  
     axios.get(`http://localhost:8080/students/email/${userEmail}`)
-      .then(response => {
-        if (response.data) {
+      .then((response) => {
+        if (response.data && response.data.name && response.data.prnNo && response.data.rollNo) {
           setStudent(response.data);
           localStorage.setItem("rollNo", response.data.rollNo);
           localStorage.setItem("prnNo", response.data.prnNo);
+        } else {
+          // Set student to null if incomplete data
+          setStudent(null);
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("No student data found, profile incomplete:", error);
         setStudent(null);
       });
   }, []);
+  
 
   const handleFileUpload = (event) => {
     setFile(event.target.files[0]);
@@ -320,93 +329,110 @@ const StudentDashboard = () => {
                 <p><strong>Year:</strong> {student.year}</p>
                 <p><strong>Branch:</strong> {student.branch}</p>
                 <p><strong>Roll No.:</strong> {student.rollNo}</p>
+                <div className="profile-status">✅ Profile Complete</div>
               </>
             ) : (
-              <p>Loading student data...</p>
+              <>
+                <p><strong>⚠️ Profile Incomplete</strong></p>
+                <p>Please <Link to="/CreateAccount">complete your profile</Link> to access document requests.</p>
+                <div className="profile-status incomplete">Profile Incomplete</div>
+              </>
             )}
-            <div className="profile-status">Profile Complete</div>
           </div>
 
-          <div className="request-document">
-            <h2 className="section-title">Request Document</h2>
-            <p className="sub-text">Select a document type and provide verification details</p>
+          {/* ✅ Show request section ONLY if profile is complete */}
+          {student && (
+            <div className="request-document">
+              <h2 className="section-title">Request Document</h2>
+              <p className="sub-text">Select a document type and provide verification details</p>
 
-            <div className="tab-buttons">
-              <button className="tab active">New Request</button>
-              <Link to="/Status" className="tab">Check Status</Link>
-              <Link to="/History" className="tab">Request History</Link>
-            </div>
+              <div className="tab-buttons">
+                <button className="tab active">New Request</button>
+                <Link to="/Status" className="tab">Check Status</Link>
+                <Link to="/History" className="tab">Request History</Link>
+              </div>
 
-            <div className="form-group">
-              <label>Important Information</label>
-              <p className="info-text">
-                📌 Bonafide Certificate: Upload Last Semester Marksheet <br />
-                📌 Leaving Certificate (LC): Upload BE Marksheet or ID Card <br />
-                📌 LOC: Upload Passout Result <br />
-                📌 Hall Ticket: Upload Previous Semester Marksheet <br />
-                📌 ID Card: Upload Your Photo and Enter Address
-              </p>
-            </div>
+              <div className="form-group">
+                <label>Important Information</label>
+                <p className="info-text">
+                  📌 Bonafide Certificate: Upload Last Semester Marksheet <br />
+                  📌 Leaving Certificate (LC): Upload BE Marksheet or ID Card <br />
+                  📌 LOC: Upload Passout Result <br />
+                  📌 Hall Ticket: Upload Previous Semester Marksheet <br />
+                  📌 ID Card: Upload Your Photo and Enter Address
+                </p>
+              </div>
 
-            <div className="form-group">
-              <label>Document Type</label>
-              <select className="input-field" value={documentType} onChange={(e) => setDocumentType(e.target.value)}>
-                <option value="">Select document type</option>
-                <option value="Bonafide Certificate">Bonafide Certificate</option>
-                <option value="Leaving Certificate">Leaving Certificate</option>
-                <option value="LOC">LOC</option>
-                <option value="ID Card">ID Card</option>
-                <option value="Hall Ticket">Hall Ticket</option>
-              </select>
-            </div>
+              <div className="form-group">
+                <label>Document Type</label>
+                <select className="input-field" value={documentType} onChange={(e) => setDocumentType(e.target.value)}>
+                  <option value="">Select document type</option>
+                  <option value="Bonafide Certificate">Bonafide Certificate</option>
+                  <option value="Leaving Certificate">Leaving Certificate</option>
+                  <option value="LOC">LOC</option>
+                  <option value="ID Card">ID Card</option>
+                  <option value="Hall Ticket">Hall Ticket</option>
+                </select>
+              </div>
 
-            <div className="form-group">
-              <label>Reason for Request</label>
-              <textarea className="input-field" value={reason} onChange={(e) => setReason(e.target.value)} placeholder="Please provide a detailed reason for your request..."></textarea>
-            </div>
+              <div className="form-group">
+                <label>Reason for Request</label>
+                <textarea
+                  className="input-field"
+                  value={reason}
+                  onChange={(e) => setReason(e.target.value)}
+                  placeholder="Please provide a detailed reason for your request..."
+                ></textarea>
+              </div>
 
-            <div className="form-group">
-              <label>Supporting Document</label>
-              {documentType === "Bonafide Certificate" || documentType === "Hall Ticket" ? (
-                <div className="upload-box" onClick={() => document.getElementById("fileUpload").click()}>
-                  <FaFileUpload className="upload-icon" />
-                  <p>{file ? file.name : "Upload Required Marksheet"}</p>
-                  <input type="file" id="fileUpload" hidden onChange={handleFileUpload} />
-                </div>
-              ) : documentType === "Leaving Certificate" ? (
-                <div className="upload-box" onClick={() => document.getElementById("fileUpload").click()}>
-                  <FaFileUpload className="upload-icon" />
-                  <p>{file ? file.name : "Upload BE Marksheet or ID Card"}</p>
-                  <input type="file" id="fileUpload" hidden onChange={handleFileUpload} />
-                </div>
-              ) : documentType === "LOC" ? (
-                <div className="upload-box" onClick={() => document.getElementById("fileUpload").click()}>
-                  <FaFileUpload className="upload-icon" />
-                  <p>{file ? file.name : "Upload Passout Result"}</p>
-                  <input type="file" id="fileUpload" hidden onChange={handleFileUpload} />
-                </div>
-              ) : documentType === "ID Card" ? (
-                <>
-                  <div className="upload-box" onClick={() => document.getElementById("photoUpload").click()}>
+              <div className="form-group">
+                <label>Supporting Document</label>
+                {documentType === "Bonafide Certificate" || documentType === "Hall Ticket" ? (
+                  <div className="upload-box" onClick={() => document.getElementById("fileUpload").click()}>
                     <FaFileUpload className="upload-icon" />
-                    <p>{photo ? photo.name : "Upload Photo"}</p>
-                    <input type="file" id="photoUpload" hidden onChange={handlePhotoUpload} />
+                    <p>{file ? file.name : "Upload Required Marksheet"}</p>
+                    <input type="file" id="fileUpload" hidden onChange={handleFileUpload} />
                   </div>
-                  <div className="form-group">
-                    <label>Enter Address</label>
-                    <textarea className="input-field" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Enter your address here..."></textarea>
+                ) : documentType === "Leaving Certificate" ? (
+                  <div className="upload-box" onClick={() => document.getElementById("fileUpload").click()}>
+                    <FaFileUpload className="upload-icon" />
+                    <p>{file ? file.name : "Upload BE Marksheet or ID Card"}</p>
+                    <input type="file" id="fileUpload" hidden onChange={handleFileUpload} />
                   </div>
-                </>
-              ) : (
-                <p>Please select a document type first.</p>
-              )}
-            </div>
+                ) : documentType === "LOC" ? (
+                  <div className="upload-box" onClick={() => document.getElementById("fileUpload").click()}>
+                    <FaFileUpload className="upload-icon" />
+                    <p>{file ? file.name : "Upload Passout Result"}</p>
+                    <input type="file" id="fileUpload" hidden onChange={handleFileUpload} />
+                  </div>
+                ) : documentType === "ID Card" ? (
+                  <>
+                    <div className="upload-box" onClick={() => document.getElementById("photoUpload").click()}>
+                      <FaFileUpload className="upload-icon" />
+                      <p>{photo ? photo.name : "Upload Photo"}</p>
+                      <input type="file" id="photoUpload" hidden onChange={handlePhotoUpload} />
+                    </div>
+                    <div className="form-group">
+                      <label>Enter Address</label>
+                      <textarea
+                        className="input-field"
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
+                        placeholder="Enter your address here..."
+                      ></textarea>
+                    </div>
+                  </>
+                ) : (
+                  <p>Please select a document type first.</p>
+                )}
+              </div>
 
-            <div className="form-buttons">
-              <Link to="/" className="cancel-btn"><FaTimesCircle /> Cancel</Link>
-              <button className="submit-btn" onClick={handleRequestSubmit}>Submit Request</button>
+              <div className="form-buttons">
+                <Link to="/" className="cancel-btn"><FaTimesCircle /> Cancel</Link>
+                <button className="submit-btn" onClick={handleRequestSubmit}>Submit Request</button>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </motion.div>
