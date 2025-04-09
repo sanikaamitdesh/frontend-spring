@@ -104,6 +104,7 @@
 // };
 
 // export default StatusPage;
+
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Sidebar from "../components/Sidebar";
@@ -162,14 +163,18 @@ const StatusPage = () => {
                     {statusInfo.text}
                   </td>
                   <td>
-                    {req.documentName ? (
-                      <>
-                        <a href={viewUrl} target="_blank" rel="noreferrer" className="doc-link">👁 View</a>
-                        <span className="divider">|</span>
-                        <a href={fileUrl} download className="doc-link">⬇ Download</a>
-                      </>
-                    ) : "Not Uploaded"}
-                  </td>
+                      {req.status === 3 ? ( // Rejected
+                        <span style={{ color: "red", fontStyle: "italic" }}>
+                          Reason: {req.rejectionReason || "No reason provided"}
+                        </span>
+                      ) : req.documentName ? (
+                        <>
+                          <a href={viewUrl} target="_blank" rel="noreferrer" className="doc-link">👁 View</a>
+                          <span className="divider">|</span>
+                          <a href={fileUrl} download className="doc-link">⬇ Download</a>
+                        </>
+                      ) : "Not Uploaded"}
+                    </td>
                 </tr>
               );
             })}

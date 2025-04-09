@@ -2,7 +2,7 @@
 .sidebar {
     width: 250px;
     height: 100vh;
-    background-color: #2A3F54; /* Dark blue */
+    background-color: white;
     display: flex;
     flex-direction: column;
     position: fixed;
@@ -33,6 +33,7 @@
     padding: 0;
     margin-top: 10px;
     width: 100%;
+    color: #333;
 }
 
 .menu li {
@@ -44,10 +45,11 @@
     cursor: pointer;
     transition: background 0.3s ease-in-out;
     color: white;
+    
 }
 
 .menu li:hover {
-    background-color: #1E2D3D;
+    background-color: #f0f0f0;
     border-left: 4px solid #007bff;
 }
 

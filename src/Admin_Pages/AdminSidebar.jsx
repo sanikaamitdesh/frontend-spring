@@ -21,13 +21,13 @@ const Sidebar = () => {
           <FaFileAlt className="icon" /> {isOpen && "Manage Requests"}
         </Link>
 
-        <Link to="/user-management" className="menu-item">
+        {/* <Link to="/user-management" className="menu-item">
           <FaUser className="icon" /> {isOpen && "User Management"}
-        </Link>
+        </Link> */}
 
-        <Link to="/documents" className="menu-item">
+        {/* <Link to="/documents" className="menu-item">
           <FaFileAlt className="icon" /> {isOpen && "Documents"}
-        </Link>
+        </Link> */}
 
         <Link to="/notifications" className="menu-item">
           <FaBell className="icon" /> {isOpen && "Notifications"}

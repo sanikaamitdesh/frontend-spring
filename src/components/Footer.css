@@ -4,11 +4,11 @@
     text-align: center;
     color: white;
   } */
-  .footer {
+   .footer {
     position: fixed;
     bottom: 0;
     left: 180px;
-    width: calc(100% - 180px); /* Same width as the main content */
+    width: calc(100% - 180px); 
     background-color: black;
     color: white;
     text-align: center;
@@ -16,3 +16,4 @@
     font-size: 12px;
   }
   
+   
